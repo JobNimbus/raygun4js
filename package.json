@@ -1,5 +1,5 @@
 {
-  "name": "raygun4js",
+  "name": "@jobnimbus/raygun4js",
   "main": "dist/raygun.umd.js",
   "files": ["dist/*"],
   "title": "Raygun4js",

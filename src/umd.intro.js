@@ -1,5 +1,9 @@
 // https://github.com/umdjs/umd/blob/master/templates/returnExportsGlobal.js
 
+function jnIsErrorEvent(val) {
+  return Object.prototype.toString.call(val) === '[object ErrorEvent]';
+}
+
 (function (root, factory) {
     if (typeof define === 'function' && define.amd) {
         // AMD. Register as an anonymous module.
@@ -25,6 +29,15 @@
     }
 
     if (!err) {
+      if (jnIsErrorEvent(msg)) {
+        var keys = [];
+        for (var propName in msg) {
+          keys.push(propName);
+        }
+        var stringified = JSON.stringify(msg, keys);
+        var message = ('message' in msg) ? msg.message : '';
+        msg = 'Unwrapped ErrorEvent (' + message +') (' + stringified + ')';
+      }
       err = new Error(msg);
     }
 
